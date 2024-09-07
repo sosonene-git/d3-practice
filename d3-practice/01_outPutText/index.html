@@ -1,14 +1,56 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>D3.js Paragraph Example</title>
+    <!-- D3.jsライブラリの読み込み -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+    <style>
+        /* チャートのコンテナのスタイル設定 */
+        #chart {
+            width: 600px;
+            height: 400px;
+            margin: 0 auto;
+        }
+    </style>
 </head>
 
 <body>
-    <div id="#chart"></div>
+    <div id="chart"></div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // body要素を選択
+            d3.select('body')
+                // p要素を追加
+                .append('p')
+                // p要素のテキストに文字を追加
+                .text('Hello, D3')
+
+            d3.select('body')
+                .append('p')
+                .text('Color is red')
+                // styleを追加
+                .style('color', 'red')
+
+            // データを設定
+            const data = ['Apple', 'Banana', 'Cherry'];
+            d3.select('body')
+                // まだ存在しない要素を選択
+                // 存在しない要素を選択することで、データとDOMの間にプレースホルダーの関係を作成
+                // これにより、D3は「これらの要素が存在すべきだが、まだ存在していない」ということを認識する
+                .selectAll('p.fruit')
+                // データを渡す
+                .data(data)
+                .join('p')
+                .attr('class', 'fruit')
+                // テキストを設定（dは現在のデータ要素）
+                .text(d => d)
+        });
+
+    </script>
 </body>
 
 </html>
